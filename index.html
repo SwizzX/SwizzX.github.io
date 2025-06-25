@@ -1,38 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title text-align:center;> SSRBotan/SwizzX </title>
-<style>
-    body {background-color: rgb(122, 162, 246);}
-</style>
+  <meta charset="UTF-8" />
+  <title>Vertical Slide Transition with Logo & Reverse</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+      background: white;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .half {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .top {
+      background-color: #ffffff;
+      color: black;
+    }
+
+    .bottom {
+      background-color: #000000;
+      color: white;
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .overlay-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5em;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .top-slide {
+      background: white;
+      transform: translateY(-100%);
+      color: black;
+    }
+
+    .bottom-slide {
+      background: black;
+      transform: translateY(100%);
+      color: white;
+    }
+
+    .animate-top {
+      animation: slide-down 0.6s forwards;
+    }
+
+    .animate-bottom {
+      animation: slide-up 0.6s forwards;
+    }
+
+    .fade-out {
+      animation: fade-out 0.9s forwards;
+    }
+
+    @keyframes slide-down {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slide-up {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fade-out {
+      to { opacity: 0; }
+    }
+
+    @keyframes bounce-up-exit {
+      0%   { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100%); opacity: 0.9; }
+    }
+
+    @keyframes bounce-down-exit {
+      0%   { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100%); opacity: 0.9; }
+    }
+
+    .bounce-up-exit {
+      animation: bounce-up-exit 0.8s forwards;
+    }
+
+    .bounce-down-exit {
+      animation: bounce-down-exit 0.8s forwards;
+    }
+
+    #pageFrame {
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 4;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    iframe {
+      height: 100%;
+      width: 100%;
+      border: none;
+    }
+
+    .preload-frame {
+      visibility: hidden;
+      position: absolute;
+      pointer-events: none;
+      width: 0;
+      height: 0;
+    }
+  </style>
 </head>
+<body>
 
-<h1 style="font-family:Cambria; text-align:center; border:2px solid lightblue; font-size:xx-large;">SSRBotan/SwizzX</h1>
+<!-- Home Page -->
+<div class="container" id="home">
+  <div class="half top" onclick="handleClick('top')">Business</div>
+  <div class="half bottom" onclick="handleClick('bottom')">Personal</div>
+</div>
 
-<p style="font-family:Cambria; text-align:center;">Welcome to my webpage! I'm SSRBotan or SwizzX, here's a gallery of everything I've made.</p>
+<!-- Overlay container with logo -->
+<div class="overlay">
+  <div id="slideTop" class="overlay-slide top-slide">SSRBotan</div>
+  <div id="slideBottom" class="overlay-slide bottom-slide">SwizzX</div>
+</div>
 
+<!-- Dynamic iFrame Container -->
+<div id="pageFrame"></div>
 
-<h3 style="font-family:Cambria; text-align:center; border:2px solid lightblue;">Rhythmeet</h1>
+<!-- Preload Hidden Iframes -->
+<iframe src="personal.html" class="preload-frame"></iframe>
+<iframe src="business.html" class="preload-frame"></iframe>
 
-<p style="font-family:Cambria;">
-    I'm the co-founder and second in charge of Rhythmeet. <br>
-    I'm currently the head of tournaments planning and management, and sole planner for the Maimai tournament department.
-</p>
+<script>
+  let lastPage = null;
+  let isTransitioning = false;
+  let lastDirection = null;
 
-<h3 style="font-family:Cambria; text-align:center; border:2px solid lightblue;">AcidBot</h1>
+  function handleClick(side) {
+    if (isTransitioning) return;
+    isTransitioning = true;
 
-<p style="font-family:Cambria;">
-    I'm the sole developer of AcidBot on discord. <br>
-    AcidBot functions as a maimai feature assistant, where you can fetch song data, and do score player rating analysis and breakdowns.
-</p>
+    const home = document.getElementById('home');
+    const frameContainer = document.getElementById('pageFrame');
+    const slideTop = document.getElementById('slideTop');
+    const slideBottom = document.getElementById('slideBottom');
 
-<h3 style="font-family:Cambria; text-align:center; border:2px solid lightblue;">Connect with me!</h1>
+    const isTop = side === 'top';
+    const targetPage = isTop ? 'business' : 'personal';
+    const iframeURL = `${targetPage}.html`;
 
-<p style="font-family:Cambria;"><a href="https://twitch.tv/swizzx">My Twitch.tv</a></p>
-<p style="font-family:Cambria;"><a href="https://instagram.com/sean_cjx">My Instagram</a></p>
-<p style="font-family:Cambria;"><a href="https://x.com/sean_cjx">My Twitter/X</a></p>
-<p style="font-family:Cambria;"><a href="https://www.youtube.com/@SSRBotan">My YouTube</a></p>
-<p style="font-family:Cambria;"><a href="https://github.com/SwizzX">My GitHub</a></p>
+    history.pushState({ page: targetPage }, '', '');
+    lastPage = targetPage;
+    lastDirection = side;
+
+    // Reset slides
+    resetSlides();
+
+    // Animate the correct overlay
+    if (isTop) {
+      slideTop.classList.add('animate-top');
+    } else {
+      slideBottom.classList.add('animate-bottom');
+    }
+
+    setTimeout(() => {
+      home.style.display = 'none';
+
+      frameContainer.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.src = iframeURL;
+
+      iframe.onload = () => {
+        frameContainer.style.visibility = 'visible';
+        frameContainer.style.opacity = 1;
+
+        const slide = isTop ? slideTop : slideBottom;
+        slide.classList.add('fade-out');
+
+        setTimeout(() => {
+          resetSlides();
+          isTransitioning = false;
+        }, 600);
+      };
+
+      frameContainer.appendChild(iframe);
+    }, 600);
+  }
+
+  function resetSlides() {
+    document.getElementById('slideTop').className = 'overlay-slide top-slide';
+    document.getElementById('slideBottom').className = 'overlay-slide bottom-slide';
+  }
+
+  window.onpopstate = () => {
+    const home = document.getElementById('home');
+    const frameContainer = document.getElementById('pageFrame');
+    const slideTop = document.getElementById('slideTop');
+    const slideBottom = document.getElementById('slideBottom');
+
+    if (!lastDirection) return;
+
+    frameContainer.style.opacity = 0;
+
+    const isTop = lastDirection === 'top';
+    const slide = isTop ? slideTop : slideBottom;
+
+    // Replay entry animation
+    slide.classList.add(isTop ? 'animate-top' : 'animate-bottom');
+
+    setTimeout(() => {
+      frameContainer.style.visibility = 'hidden';
+      frameContainer.innerHTML = '';
+      home.style.display = 'flex';
+
+      slide.classList.remove('animate-top', 'animate-bottom');
+
+      // 🔥 FIX: Bounce in opposite direction from where it came
+      const bounceClass = isTop ? 'bounce-up-exit' : 'bounce-down-exit';
+      slide.classList.add(bounceClass);
+
+      setTimeout(() => {
+        resetSlides();
+      }, 600);
+    }, 600);
+
+    lastPage = null;
+    lastDirection = null;
+  };
+
+</script>
 
 </body>
 </html>
