@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Vertical Slide Transition with Logo & Reverse</title>
+  <script src="https://kit.fontawesome.com/b20253bfc0.js" crossorigin="anonymous"></script>
+  <title>SSRBotan</title>
   <style>
     html, body {
       margin: 0;
@@ -20,32 +21,27 @@
       height: 100%;
       position: relative;
     }
-
+    
     .half {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 2em;
+      font-size: 2.5em;
+      font-weight: bold;
       cursor: pointer;
       z-index: 1;
+      text-shadow: 2px 2px 3px gray;
     }
 
     .top {
       background-color: #ffffff;
       color: black;
-      text-shadow: 2px 2px 3px gray;
-      font-size: 2.5em;
-      font-weight: bold;
-
     }
 
     .bottom {
       background-color: #000000;
       color: white;
-      text-shadow: 2px 2px 3px gray;
-      font-size: 2.5em;
-      font-weight: bold;
     }
 
     .overlay {
@@ -151,6 +147,24 @@
       width: 0;
       height: 0;
     }
+
+    /* Back button */
+    #backBtn {
+      position: fixed;
+      top: 1em;
+      left: 1em;
+      z-index: 10;
+      background: #4c4d4f;
+      border: aliceblue double 6px;
+      font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+      width: clamp(60px, 10vw, 90px);
+      height: clamp(60px, 10vw, 90px);
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 100px;
+      display: none;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -170,6 +184,9 @@
 <!-- Dynamic iFrame Container -->
 <div id="pageFrame"></div>
 
+<!-- Global Back Button (overlays iframe) -->
+<button id="backBtn" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
+
 <!-- Preload Hidden Iframes -->
 <iframe src="personal.html" class="preload-frame"></iframe>
 <iframe src="business.html" class="preload-frame"></iframe>
@@ -187,6 +204,7 @@
     const frameContainer = document.getElementById('pageFrame');
     const slideTop = document.getElementById('slideTop');
     const slideBottom = document.getElementById('slideBottom');
+    const backBtn = document.getElementById('backBtn');
 
     const isTop = side === 'top';
     const targetPage = isTop ? 'business' : 'personal';
@@ -208,7 +226,6 @@
 
     setTimeout(() => {
       home.style.display = 'none';
-
       frameContainer.innerHTML = '';
       const iframe = document.createElement('iframe');
       iframe.src = iframeURL;
@@ -216,6 +233,7 @@
       iframe.onload = () => {
         frameContainer.style.visibility = 'visible';
         frameContainer.style.opacity = 1;
+        backBtn.style.display = 'block';
 
         const slide = isTop ? slideTop : slideBottom;
         slide.classList.add('fade-out');
@@ -240,6 +258,7 @@
     const frameContainer = document.getElementById('pageFrame');
     const slideTop = document.getElementById('slideTop');
     const slideBottom = document.getElementById('slideBottom');
+    const backBtn = document.getElementById('backBtn');
 
     if (!lastDirection) return;
 
@@ -254,29 +273,27 @@
     slide.classList.add(entryClass);
 
     setTimeout(() => {
-      // Step 2: Pause briefly after card is centered
+      // Step 2: Pause briefly
       setTimeout(() => {
-        // Step 3: Bring back home screen
+        // Step 3: Return home
         frameContainer.style.visibility = 'hidden';
         frameContainer.innerHTML = '';
         home.style.display = 'flex';
+        backBtn.style.display = 'none';
 
         // Step 4: Bounce back out
         slide.classList.remove(entryClass);
         slide.classList.add(exitClass);
 
-        // Step 5: Clean up
         setTimeout(() => {
           resetSlides();
-        }, 600); // bounce duration
-      }, 300); // pause duration
-    }, 600); // slide-in duration
+        }, 600);
+      }, 300);
+    }, 600);
 
     lastPage = null;
     lastDirection = null;
   };
-
-
 </script>
 
 </body>
