@@ -12,6 +12,14 @@
         background-position: center;
         background-size: cover;
     }
+
+    /* Override for smaller (mobile) viewports */
+    @media screen and (max-width: 768px) {
+        body {
+            background-image: url("bg_vertical.png");
+        }
+    }
+
     .center {
         display: block;
         margin-left: auto;

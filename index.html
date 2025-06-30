@@ -148,7 +148,6 @@
       height: 0;
     }
 
-    /* Back button */
     #backBtn {
       position: fixed;
       top: 1em;
@@ -184,10 +183,9 @@
 <!-- Dynamic iFrame Container -->
 <div id="pageFrame"></div>
 
-<!-- Global Back Button (overlays iframe) -->
+<!-- Global Back Button -->
 <button id="backBtn" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></button>
 
-<!-- Preload Hidden Iframes -->
 <iframe src="personal.html" class="preload-frame"></iframe>
 <iframe src="business.html" class="preload-frame"></iframe>
 
@@ -214,10 +212,8 @@
     lastPage = targetPage;
     lastDirection = side;
 
-    // Reset slides
     resetSlides();
 
-    // Animate the correct overlay
     if (isTop) {
       slideTop.classList.add('animate-top');
     } else {
@@ -269,19 +265,15 @@
     const entryClass = isTop ? 'animate-top' : 'animate-bottom';
     const exitClass = isTop ? 'bounce-up-exit' : 'bounce-down-exit';
 
-    // Step 1: Re-enter
     slide.classList.add(entryClass);
 
     setTimeout(() => {
-      // Step 2: Pause briefly
       setTimeout(() => {
-        // Step 3: Return home
         frameContainer.style.visibility = 'hidden';
         frameContainer.innerHTML = '';
         home.style.display = 'flex';
         backBtn.style.display = 'none';
 
-        // Step 4: Bounce back out
         slide.classList.remove(entryClass);
         slide.classList.add(exitClass);
 
