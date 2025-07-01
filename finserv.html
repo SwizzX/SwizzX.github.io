@@ -1,19 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito:wght@400;600&family=Open+Sans:wght@400;600&family=Quicksand:wght@400;600&family=Roboto:wght@400;600&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finserv Solutions</title>
     <style>
-        body{
-            background-color: rgb(255, 255, 255);
-            background-image: url(utopia_horizon.png);
-            background-size: cover;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }
-    </style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: auto; /* disable smooth so we can handle it ourselves */
+      height: 100%;
+      overflow: hidden; /* disable native scroll */
+      font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+      color: white;
+      background-color: #000;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 10;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .scroller {
+      height: 100vh;
+      width: 100%;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    section {
+      height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+      position: relative;
+      z-index: 0;
+    }
+
+    section.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    #scene1 {
+      background-image: url('utopia_horizon.png');
+    }
+    #scene2 {
+      background-color: grey;
+    }
+    #scene3 {
+      background-color: black;
+    }
+
+    @media (max-width: 768px) {
+      #scene1,
+      #scene2,
+      #scene3 {
+        background-image: url('utopia_vertical.png');
+      }
+
+      nav {
+        justify-content: center;
+        top: auto;
+        bottom: 1rem;
+        right: 0;
+        left: 0;
+      }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        text-align: center;
+    }
+
+
+    .content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .stagger.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loader {
+      width: 2em;
+      height: 2em;
+      border: 4px solid #fff;
+      border-top: 4px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-    
+  <nav>
+    <a href="#scene1">Home</a>
+    <a href="#scene2">Services</a>
+    <a href="#scene3">Contact</a>
+  </nav>
+
+  <div class="scroller">
+    <section id="scene1"><div class="loader"></div></section>
+    <section id="scene2"><div class="loader"></div></section>
+    <section id="scene3"><div class="loader"></div></section>
+  </div>
+
+  <script>
+    const scenes = ["scene1", "scene2", "scene3"];
+
+    scenes.forEach(id => {
+      const el = document.getElementById(id);
+
+      fetch(`pages/${id}.html`)
+        .then(res => res.text())
+        .then(html => {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("content");
+
+          const temp = document.createElement("div");
+          temp.innerHTML = html;
+          Array.from(temp.children).forEach((child, i) => {
+            child.classList.add("stagger");
+            wrapper.appendChild(child);
+          });
+
+          el.innerHTML = "";
+          el.appendChild(wrapper);
+
+          void wrapper.offsetWidth;
+          wrapper.classList.add("visible");
+
+          setTimeout(() => {
+            wrapper.querySelectorAll('.stagger').forEach((el, i) => {
+              setTimeout(() => el.classList.add('visible'), i * 150);
+            });
+          }, 200);
+        });
+    });
+
+    const sections = document.querySelectorAll("section");
+    const scroller = document.querySelector(".scroller");
+
+    const sceneObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          sections.forEach(sec => {
+            if (sec !== entry.target) sec.classList.remove("active");
+          });
+        }
+      });
+    }, {
+      threshold: 0.6
+    });
+
+    sections.forEach(section => {
+      sceneObserver.observe(section);
+    });
+  </script>
 </body>
 </html>
