@@ -71,21 +71,32 @@
       z-index: 1;
     }
 
-    #scene1 {
-      background-image: url('utopia_horizon.png');
+    #home {
+      /* background-image: url('utopia_horizon.png'); */
+      background-color: rgb(172, 172, 172);
     }
-    #scene2 {
+    #services {
       background-color: grey;
     }
-    #scene3 {
+    #founders {
+      background-color: grey;
+    }
+    #contact {
       background-color: black;
     }
 
     @media (max-width: 768px) {
-      #scene1,
-      #scene2,
-      #scene3 {
+      #home {
         background-image: url('utopia_vertical.png');
+      }
+      #services {
+        background-color: grey;
+      }
+      #founders {
+        background-color: grey;
+      }
+      #contact {
+        background-color: black;
       }
 
       nav {
@@ -146,19 +157,21 @@
 </head>
 <body>
   <nav>
-    <a href="#scene1">Home</a>
-    <a href="#scene2">Services</a>
-    <a href="#scene3">Contact</a>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#founders">Founders</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <div class="scroller">
-    <section id="scene1"><div class="loader"></div></section>
-    <section id="scene2"><div class="loader"></div></section>
-    <section id="scene3"><div class="loader"></div></section>
+    <section id="home"><div class="loader"></div></section>
+    <section id="services"><div class="loader"></div></section>
+    <section id="founders"><div class="loader"></div></section>
+    <section id="contact"><div class="loader"></div></section>
   </div>
 
   <script>
-    const scenes = ["scene1", "scene2", "scene3"];
+    const scenes = ["home", "services", "founders", "contact"];
 
     scenes.forEach(id => {
       const el = document.getElementById(id);
