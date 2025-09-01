@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito:wght@400;600&family=Open+Sans:wght@400;600&family=Quicksand:wght@400;600&family=Roboto:wght@400;600&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finserv Solutions</title>
+    <style>
+        html, body {
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            color: white;
+            background-color: #30b6ab;
+        }
+
+        .header {
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(79, 81, 118, 0.37);
+            border-radius: 15px;
+        }
+
+        .body_content {
+            backdrop-filter: blur(13px);
+            -webkit-backdrop-filter: blur(13px);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(79, 81, 118, 0.37);
+        }
+
+        @media (max-width: 768px) {
+            html, body {
+            background-image: url('utopia_vertical.png');
+            background-size: cover;
+            background-repeat: repeat;
+            }
+        }
+
+        @media (min-width: 769px) {
+            html, body {
+            background-image: url('utopia_horizon.png');
+            background-size: cover;
+            background-repeat: repeat;
+            }
+        }
+
+        .services {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: white;
+            text-shadow: #92ebf1 1px 0 10px;
+        }
+
+        .service-column {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .service-header {
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .service-box {
+            padding: 10px 15px;
+        }
+
+        .service-box h3 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        ol {
+            margin: 0 0 10px 20px;
+            padding: 0;
+        }
+
+    </style>
+</head>
+
+<h1 class=header style="min-width: 50%; padding: 0.3em; font-size: 35px; text-shadow: #92ebf1 1px 0 10px;">Finserv Solutions</h1>
+<p class= body_content style="padding: 3em; margin: auto; margin-bottom: 10px; font-size: 1.2rem;">
+    FinServ Solutions Sdn Bhd is a locally incorporated company established in 2020 initially by 2 professional individuals to assist clients with business advisory solutions. In support of this advisory services, we may also cover areas in organizational transformation, efficiency building, technology solutions, and generational succession mentorship.
+</p>
+
+<div class="services" style="color:black;">
+    <!-- Advisory Services -->
+    <div class="service-column">
+        <div class="service-header header">Advisory Services</div>
+        <div class="service-box header">
+            <h3>Financial Advisory</h3>
+            <ol>
+                <li>Business Strategy</li>
+                <li>Financial Presentation</li>
+                <li>Working Capital Financing</li>
+                <li>Capital Expenditure Financing</li>
+            </ol>
+
+            <h3>Enterprise IT Advisory</h3>
+            <ol>
+                <li>IT Strategy</li>
+                <li>Digital Transformation</li>
+            </ol>
+
+            <h3>Platform Advisory</h3>
+            <ol>
+                <li>Database</li>
+                <li>Application</li>
+                <li>Cloud</li>
+                <li>CMS</li>
+                <li>APIs</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Technology Services -->
+    <div class="service-column">
+        <div class="service-header header">Technology Services</div>
+        <div class="service-box header">
+            <h3>Banking Services Integration</h3>
+            <ol>
+                <li>Internet Banking</li>
+                <li>Cash Management – Payments and Collections</li>
+                <li>Trade Finance and Services</li>
+            </ol>
+
+            <h3>Applications Development</h3>
+            <ol>
+                <li>Software development and maintenance</li>
+                <li>Digital Transformation</li>
+                <li>Web and Mobile applications</li>
+            </ol>
+
+            <h3>Infrastructure</h3>
+            <ol>
+                <li>IT Security Strategy</li>
+                <li>Network Integration, Management and Maintenance Strategy</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Professional Services -->
+    <div class="service-column">
+        <div class="service-header header">Professional Services</div>
+        <div class="service-box header">
+            <h3>Software Management</h3>
+            <ol>
+                <li>Applications Management</li>
+                <li>Systems Integration</li>
+                <li>Working Capital Financing</li>
+                <li>Capital Expenditure Financing</li>
+            </ol>
+
+            <h3>Infrastructure Management</h3>
+            <ol>
+                <li>Network Set-up</li>
+                <li>Operating Systems Management</li>
+                <li>Database Management</li>
+            </ol>
+
+            <h3>Project Management</h3>
+            <ol>
+                <li>Implementation Services</li>
+                <li>Knowledge Transfer</li>
+                <li>End-User Readiness</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div style="height: 2.5em; background-color: #181d1d; cursor: pointer;" onclick="window.location.href='contact_us.html'">
+    <p style="color: white; text-align: center; margin: 0; line-height: 2.5em;">Contact us for enquiries <i class="fas fa-phone"></i> </p>
+</div>

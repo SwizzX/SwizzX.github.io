@@ -1,0 +1,101 @@
+<style>
+    .header {
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(79, 81, 118, 0.37);
+        border-radius: 15px;
+    }
+
+    .body_content {
+        backdrop-filter: blur(13px);
+        -webkit-backdrop-filter: blur(13px);
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(79, 81, 118, 0.37);
+    }
+    html, body {
+        padding: 0;
+        font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+        color: white;
+        background-color: #7a8584;
+    }
+    .profile {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 40px;
+    }
+    .profile img {
+        width: 150px;
+        height: auto;
+        margin-right: 20px;
+    }
+    .profile h2 {
+        margin: 0;
+    }
+    .profile ul {
+        margin-top: 10px;
+        text-align: left;
+    }
+    img {
+        border-radius: 20px;
+    }
+
+    @media (max-width: 600px) {
+        .profile {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            padding: 1.5em !important;
+            width: 100%;
+            min-height: 60vw;
+        }
+        .profile img {
+            width: 90vw;
+            max-width: 300px;
+            margin-right: 0;
+            margin-bottom: 1em;
+        }
+        .profile h2 {
+            font-size: 7vw !important;
+            text-align: center;
+        }
+        .profile ul {
+            font-size: 4vw !important;
+            padding-right: 0 !important;
+        }
+    }
+</style>
+</head>
+<body>
+<h1 class=header style="min-width: 50%; padding: 0.3em; margin-bottom: 0.5em; color:black; font-size: 35px;">Contact Us</h1>
+<div class="profile header" style="padding: 3em; padding-left: 3em; padding-right: 3em;">
+    <img src="andre.jpg" alt="Andre Lee">
+    <div style="color: black; width: 65%;">
+        <h2>Andre Lee</h2>
+        <ul>
+            <li>39 years career commercial banker</li>
+            <li>Experienced in Financing, Banking Operations, Technology, Credit Management, Risk &amp; Compliance, Trade Finance &amp; Services and Cash Management</li>
+            <li>Expertise in financial advisory and structuring, solutions development and integration</li>
+        </ul>
+    </div>
+</div>
+
+<div class="profile header" style="padding: 3em; padding-left: 3em; padding-right: 3em; flex-direction: row-reverse;">
+    <img src="irene.jpg" alt="Irene Gan">
+    <div style="color: black; padding-right: 10px;">
+        <h2>Irene Gan</h2>
+        <ul>
+            <li>25 years career IT Specialist and commercial banker</li>
+            <li>Experienced in Technology integration and services, and Cash Management Solutions</li>
+            <li>Expertise in solutions development and integration</li>
+        </ul>
+    </div>
+</div>
+
+<h1 style="margin-bottom: 0.5em; text-align: center;">Let’s Work Together</h1>
+<p style="max-width: 600px; margin: 0 auto; font-size: 1.2rem; text-align: center;">
+  Reach out via <a href="mailto:irene.gan@finserv.com.my" style="color: #a8f8ff; text-decoration: none;">irene.gan@finserv.com.my</a><br>
+  or call us at <span style="white-space: nowrap;">+6012-232 2205</span>
+</p>
+
+</body>
+</html>
