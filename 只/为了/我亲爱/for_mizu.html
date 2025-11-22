@@ -1,0 +1,68 @@
+<style>
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  section {
+    height: 100vh;
+    scroll-snap-align: start;
+  }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Mizu</title>
+</head>
+<section id="scene1">
+  <!-- scene 1 content -->
+   <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;">April 12, 2025</h1>
+    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
+    第一天見到你
+    </p>
+</section>
+
+<section id="scene2">
+  <!-- scene 2 content -->
+  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;">August 5, 2025</h1>
+    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
+    第一次跟你讲话和打mai
+    </p>
+</section>
+
+<section id="scene3">
+  <!-- scene 3 content -->
+  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;">October 5, 2025</h1>
+    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
+    跟你庆祝生日,然后跟你告白
+    </p>
+</section>
+
+<section id="scene4">
+  <!-- scene 4 content -->
+  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;">December 25, 2025</h1>
+    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
+    首先道歉，华语还是很烂，但我也想跟你说一些心里话<br>
+    虽然认识了不到半年，但感觉像你是我真条命内认识的人，第一个会想要理解我，会对我有耐心的，而在我身边时真的喜欢我的陪伴<br>
+    我们认识的这几个月已让我感觉到对一位有多重要的，<br>
+    永远会感谢，不只有的机会认识你这位我心里最重要的，但又感谢有的机会爱上你<br>
+    希望未来的日子里，我们可以一起走下去，不管是开心还是难过的时刻，我都想陪在你身边<br>
+    希望你也能感受到我对你的爱意<br>
+    </p>
+</section>
+
+<script>
+  let currentScene = 1;
+  window.addEventListener('wheel', event => {
+    event.preventDefault();
+    if (event.deltaY > 0) {
+      if (currentScene !== 2) {
+        currentScene = (currentScene + 1) % 4;
+        window.scrollTo(0, currentScene * window.innerHeight);
+      }
+    } else if (currentScene !== 1) {
+      currentScene = (currentScene + 2) % 4;
+      window.scrollTo(0, currentScene * window.innerHeight);
+    }
+  });
+</script>
