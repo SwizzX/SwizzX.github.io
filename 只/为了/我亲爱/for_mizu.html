@@ -8,6 +8,21 @@
     height: 100vh;
     scroll-snap-align: start;
   }
+
+  section h1,
+  section p {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.8s ease, transform 1.8s ease;
+  }
+
+  section.active h1,
+  section.active p {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+
   body {
     font-family: "ZCOOL KuaiLe", sans-serif;
   }
@@ -70,25 +85,178 @@
   100% { transform: translateX(-50%) scale(1); }
 }
 
+#scrollHeart {
+  position: fixed;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+
+  /* Start as outline */
+  color: transparent;
+  -webkit-text-stroke: 2px #ff4d6d;
+
+  /* Gradient fill controlled by JS */
+  background: linear-gradient(to top, #ff4d6d 0%, transparent 0%);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  pointer-events: none;
+}
+
 </style>
 
 <script src="https://kit.fontawesome.com/b20253bfc0.js" crossorigin="anonymous"></script>
 <script>
   let currentScene = 0;
+  const maxScene = 5; // since scene6 → index 5
+
+  function pauseHeartbeat() {
+    const heart = document.getElementById("scrollHeart");
+    heart.style.animationPlayState = "paused";
+    heart.style.transform = "translateX(-50%) scale(1)"; // reset scale
+  }
+
+  function resumeHeartbeat() {
+    const heart = document.getElementById("scrollHeart");
+    heart.style.animationPlayState = "running";
+  }
+
+  window.addEventListener("scroll", () => {
+    // Compute the current section index
+    const scene = Math.round(window.scrollY / window.innerHeight);
+    const clamped = Math.max(0, Math.min(maxScene, scene));
+
+    if (clamped !== currentScene) {
+      currentScene = clamped;
+
+      // Update buttons whenever the scene changes
+      updateButtons();
+    }
+
+    // Update heart fill as before
+    const rect = document.getElementById("heartFillRect");
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = window.scrollY / maxScroll;
+    const newY = 100 - scrollPercent * 100;
+    rect.setAttribute("y", newY);
+
+    // Update heartbeat speed dynamically
+    const heart = document.getElementById("scrollHeart");
+    const minSpeed = 0.9;
+    const maxSpeed = 2.2;
+    const newDuration = maxSpeed - (scrollPercent * (maxSpeed - minSpeed));
+    heart.style.animationDuration = newDuration + "s";
+  });
+
+  function updateButtons() {
+    const leftBtn = document.querySelector('.page-btn-left');
+    const rightBtn = document.querySelector('.page-btn-right');
+
+    // hide left button on first page
+    if (currentScene === 0) {
+      leftBtn.style.display = "none";
+    } else {
+      leftBtn.style.display = "flex";
+    }
+
+    // hide right button on last page
+    if (currentScene === maxScene) {
+      rightBtn.style.display = "none";
+    } else {
+      rightBtn.style.display = "flex";
+    }
+  }
 
   function goPrevPage() {
-    if (currentScene > 0) {
-      currentScene -= 1;
-    }
-    window.scrollTo(0, currentScene * window.innerHeight);
+    if (currentScene > 0) currentScene -= 1;
+
+    pauseHeartbeat();
+
+    window.scrollTo({
+      top: currentScene * window.innerHeight,
+      behavior: "smooth"
+    });
+
+    setTimeout(() => {
+      resumeHeartbeat();
+    }, 300); // matches smooth scroll timing
+
+    updateButtons();
   }
 
   function goNextPage() {
-    if (currentScene < 5) {
-      currentScene += 1;
-    }
-    window.scrollTo(0, currentScene * window.innerHeight);
+    if (currentScene < maxScene) currentScene += 1;
+
+    pauseHeartbeat();
+
+    window.scrollTo({
+      top: currentScene * window.innerHeight,
+      behavior: "smooth"
+    });
+
+    setTimeout(() => {
+      resumeHeartbeat();
+    }, 300);
+
+    updateButtons();
   }
+
+
+  // run once when page loads
+  window.onload = updateButtons;
+
+  window.addEventListener("scroll", () => {
+    const rect = document.getElementById("heartFillRect");
+
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = window.scrollY / maxScroll;
+
+    // From y = 100 (empty) → y = 0 (full)
+    const newY = 100 - scrollPercent * 100;
+
+    rect.setAttribute("y", newY);
+  });
+
+  window.addEventListener("scroll", () => {
+    const heart = document.getElementById("scrollHeart");
+
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const percent = window.scrollY / maxScroll; // 0 → 1
+
+    // Range: slowest = 2.4s, fastest = 0.9s (you can tune these)
+    const minSpeed = 0.9;
+    const maxSpeed = 2.2;
+
+    const newDuration = maxSpeed - (percent * (maxSpeed - minSpeed));
+    heart.style.animationDuration = newDuration + "s";
+  });
+
+  function updateActiveSection() {
+    const sections = document.querySelectorAll("section");
+    const scrollPos = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    sections.forEach((section, index) => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+
+      // Activate section if it's mostly in view
+      if (scrollPos + windowHeight * 0.5 >= sectionTop &&
+          scrollPos + windowHeight * 0.5 < sectionBottom) {
+        section.classList.add("active");
+      } else {
+        section.classList.remove("active");
+      }
+    });
+  }
+
+  // Run on scroll
+  window.addEventListener("scroll", updateActiveSection);
+
+  // Run on page load
+  window.addEventListener("load", updateActiveSection);
+
 </script>
 
 <head>
@@ -153,15 +321,57 @@
 </section>
 
 <div class="page-btn page-btn-left" onclick="goPrevPage()">
-  <span>←</span>
+  <i class="fa-solid fa-arrow-left"></i>
 </div>
 
-<div style="  position: fixed; bottom: 10vh; left: 50%; transform: translateX(-50%); font-size: 3rem; animation: heartbeat 2.4s infinite; color: #ff4d6d; text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d;">
-  ❤️
+<div id="heartButton" style="cursor: pointer;">
+  <svg id="scrollHeart" width="80" height="80" viewBox="0 0 100 100" style="
+    animation: heartbeat 2.4s infinite;
+    position: fixed;
+    bottom: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    color: #ff4d6d; text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d;
+  ">
+    <!-- Heart Outline -->
+    <path id="heartOutline"
+      d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
+      fill="none"
+      stroke="#ff4d6d"
+      stroke-width="5"
+    />
+
+    <!-- Red Fill -->
+    <defs>
+      <clipPath id="heartClip">
+        <path
+          d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
+        ></path>
+      </clipPath>
+    </defs>
+
+    <!-- Gradual Fill Rectangle -->
+    <rect id="heartFillRect"
+      x="0" y="100"
+      width="100" height="100"
+      fill="#ff4d6d"
+      clip-path="url(#heartClip)"
+    />
+  </svg>
 </div>
+
+<script>
+  document.getElementById("heartButton").addEventListener("click", () => {
+    currentScene = 0;
+    updateButtons();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    updateHeartFillForScene(0);
+  });
+</script>
 
 <div class="page-btn page-btn-right" onclick="goNextPage()">
-  <span>→</span>
+  <i class="fa-solid fa-arrow-right"></i>
 </div>
 
 <!-- <div style="position: fixed; bottom: 10vh; left: 35%;">
