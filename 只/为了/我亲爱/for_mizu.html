@@ -8,8 +8,93 @@
     height: 100vh;
     scroll-snap-align: start;
   }
+  body {
+    font-family: "ZCOOL KuaiLe", sans-serif;
+  }
+
+.page-btn {
+  position: fixed;
+  bottom: 10vh;
+  height: 6vh;
+  width: 6vh;
+  background: #fffdfa;
+  border: 2px solid #b7a78a;
+  border-radius: 10px;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.15);
+  font-size: 2rem;
+  font-family: "Georgia", serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  /* remove transform transitions */
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.page-btn-left {
+  left: 10%;
+  animation: wiggle-left 2.7s ease-in-out infinite;
+  animation-fill-mode: both;
+}
+
+.page-btn-right {
+  right: 10%;
+  animation: wiggle-right 2.7s ease-in-out infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes wiggle-left {
+  0% { transform: rotateY(0deg) translateX(0); }
+  25% { transform: rotateY(18deg) translateX(-2px); }
+  50% { transform: rotateY(12deg) translateX(0); }
+  75% { transform: rotateY(20deg) translateX(-3px); }
+  100% { transform: rotateY(0deg) translateX(0); }
+}
+
+@keyframes wiggle-right {
+  0% { transform: rotateY(0deg) translateX(0); }
+  25% { transform: rotateY(-18deg) translateX(2px); }
+  50% { transform: rotateY(-12deg) translateX(0); }
+  75% { transform: rotateY(-20deg) translateX(3px); }
+  100% { transform: rotateY(0deg) translateX(0); }
+}
+
+@keyframes heartbeat {
+  0%   { transform: translateX(-50%) scale(1); }
+  14%  { transform: translateX(-50%) scale(1.2); }
+  28%  { transform: translateX(-50%) scale(1); }
+  42%  { transform: translateX(-50%) scale(1.2); }
+  70%  { transform: translateX(-50%) scale(1); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
 </style>
+
+<script src="https://kit.fontawesome.com/b20253bfc0.js" crossorigin="anonymous"></script>
+<script>
+  let currentScene = 0;
+
+  function goPrevPage() {
+    if (currentScene > 0) {
+      currentScene -= 1;
+    }
+    window.scrollTo(0, currentScene * window.innerHeight);
+  }
+
+  function goNextPage() {
+    if (currentScene < 5) {
+      currentScene += 1;
+    }
+    window.scrollTo(0, currentScene * window.innerHeight);
+  }
+</script>
+
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Mizu</title>
@@ -18,7 +103,7 @@
   <!-- scene 1 content -->
    <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;">April 12, 2025</h1>
     <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    第一天見到你
+    第一天见到你
     </p>
 </section>
 
@@ -67,18 +152,32 @@
     </p>
 </section>
 
-<script>
-  let currentScene = 1;
-  window.addEventListener('wheel', event => {
-    event.preventDefault();
-    if (event.deltaY > 0) {
-      if (currentScene !== 2) {
-        currentScene = (currentScene + 1) % 6;
-        window.scrollTo(0, currentScene * window.innerHeight);
-      }
-    } else if (currentScene !== 1) {
-      currentScene = (currentScene + 2) % 6;
-      window.scrollTo(0, currentScene * window.innerHeight);
-    }
-  });
-</script>
+<div class="page-btn page-btn-left" onclick="goPrevPage()">
+  <span>←</span>
+</div>
+
+<div style="  position: fixed; bottom: 10vh; left: 50%; transform: translateX(-50%); font-size: 3rem; animation: heartbeat 2.4s infinite; color: #ff4d6d; text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d;">
+  ❤️
+</div>
+
+<div class="page-btn page-btn-right" onclick="goNextPage()">
+  <span>→</span>
+</div>
+
+<!-- <div style="position: fixed; bottom: 10vh; left: 35%;">
+  <button onclick="window.scrollTo(0, (currentScene - 1) % 6 * window.innerHeight)" style="background: transparent; border: 1px black; height: 5vh; width: 5vh;">
+    <i class="fa-solid fa-arrow-left" style="animation: arrow-bounce-left 1.5s ease infinite; transform: translateX(-10px);"></i>
+  </button>
+</div>
+
+<div style="position: fixed; bottom: 10vh; right: 35%;">
+  <button onclick="window.scrollTo(0, (currentScene + 1) % 6 * window.innerHeight)" style="background: transparent; border: 1px black; height: 5vh; width: 5vh;">
+    <i class="fa-solid fa-arrow-right" style="animation: arrow-bounce-right 1.5s ease infinite; transform: translateX(10px);"></i>
+  </button>
+</div> -->
+
+<style>
+
+</style>
+
+
