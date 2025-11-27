@@ -16,6 +16,11 @@
     transition: opacity 1.8s ease, transform 1.8s ease;
   }
 
+  .date {
+    border-bottom: rgb(165, 97, 216) groove 10px;
+    border-top: none;
+  }
+
   section.active h1,
   section.active p {
     opacity: 1;
@@ -25,6 +30,7 @@
 
   body {
     font-family: "ZCOOL KuaiLe", sans-serif;
+    background-image: linear-gradient(rgb(154, 90, 194), pink);
   }
 
 .page-btn {
@@ -83,6 +89,14 @@
   42%  { transform: translateX(-50%) scale(1.2); }
   70%  { transform: translateX(-50%) scale(1); }
   100% { transform: translateX(-50%) scale(1); }
+}
+
+@keyframes wiggle-assets {  
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(3deg) scale(1.05); }
+  50%  { transform: rotate(0deg) scale(0.97); }
+  75%  { transform: rotate(-3deg) scale(1.04); }
+  100% { transform: rotate(0deg) scale(1); }
 }
 
 #scrollHeart {
@@ -269,7 +283,7 @@
 </head>
 <section id="scene1">
   <!-- scene 1 content -->
-   <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;">April 12, 2025</h1>
+   <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;"><div class="date">April 12, 2025</div></h1>
     <p style="text-align: center; font-size: 2.5rem; margin: auto;">
     第一天见到你
     </p>
@@ -277,7 +291,7 @@
 
 <section id="scene2">
   <!-- scene 2 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;">August 5, 2025</h1>
+  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;"><div class="date">August 5, 2025</div></h1>
     <p style="text-align: center; font-size: 2.5rem; margin: auto;">
     第一次跟你讲话和打mai
     </p>
@@ -285,7 +299,7 @@
 
 <section id="scene3">
   <!-- scene 3 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;">October 5, 2025</h1>
+  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 45vh;"><div class="date">October 5, 2025</div></h1>
     <p style="text-align: center; font-size: 2.5rem; margin: auto;">
     跟你庆祝生日,然后跟你告白
     </p>
@@ -293,7 +307,7 @@
 
 <section id="scene4">
   <!-- scene 4 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;">December 25, 2025</h1>
+  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;"><div class="date">December 25, 2025</div></h1>
     <p style="text-align: center; font-size: 2.5rem; margin: auto;">
     首先道歉，我的华语还是很烂。<br>
     其实，我不太会面对面讲话时表达自己感情的，比较会用写的方式。<br>
@@ -324,54 +338,58 @@
   <i class="fa-solid fa-arrow-left"></i>
 </div>
 
-<div id="heartButton" style="cursor: pointer;">
-  <svg id="scrollHeart" width="80" height="80" viewBox="0 0 100 100" style="
-    animation: heartbeat 2.4s infinite;
-    position: fixed;
-    bottom: 10vh;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    color: #ff4d6d; text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d;
-  ">
-    <!-- Heart Outline -->
-    <path id="heartOutline"
-      d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
-      fill="none"
-      stroke="#ff4d6d"
-      stroke-width="5"
-    />
+<svg id="scrollHeart" width="80" height="80" viewBox="0 0 100 100" style="
+  animation: heartbeat 2.4s infinite;
+  position: fixed;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  color: #ff4d6d; text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d;
+">
+  <!-- Heart Outline -->
+  <path id="heartOutline"
+    d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
+    fill="none"
+    stroke="#ff4d6d"
+    stroke-width="5"
+  />
 
-    <!-- Red Fill -->
-    <defs>
-      <clipPath id="heartClip">
-        <path
-          d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
-        ></path>
-      </clipPath>
-    </defs>
+  <!-- Red Fill -->
+  <defs>
+    <clipPath id="heartClip">
+      <path
+        d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
+      ></path>
+    </clipPath>
+  </defs>
 
-    <!-- Gradual Fill Rectangle -->
-    <rect id="heartFillRect"
-      x="0" y="100"
-      width="100" height="100"
-      fill="#ff4d6d"
-      clip-path="url(#heartClip)"
-    />
-  </svg>
-</div>
+  <!-- Gradual Fill Rectangle -->
+  <rect id="heartFillRect"
+    x="0" y="100"
+    width="100" height="100"
+    fill="#ff4d6d"
+    clip-path="url(#heartClip)"
+  />
+</svg>
 
-<script>
-  document.getElementById("heartButton").addEventListener("click", () => {
-    currentScene = 0;
-    updateButtons();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    updateHeartFillForScene(0);
-  });
-</script>
+<!-- <script>
+document.getElementById("scrollHeart").addEventListener("click", () => {
+  const next = document.querySelector("section:nth-of-type(2)");
+  next.scrollIntoView({ behavior: "smooth" });
+});
+</script> -->
 
 <div class="page-btn page-btn-right" onclick="goNextPage()">
   <i class="fa-solid fa-arrow-right"></i>
+</div>
+
+<div style="position: fixed; left: 3%; bottom: 25%; animation: wiggle-assets 1.9s infinite; opacity: 0.5;">
+  <img src="../../../strawberry.png" style="width: 5vh; height: 5vh;" />
+</div>
+
+<div style="position: fixed; left: 1%; top:0%; animation: wiggle-assets 1.9s infinite;">
+  <img src="../../../pencil.png" style="width: 5vh; height: 5vh;" />
 </div>
 
 <!-- <div style="position: fixed; bottom: 10vh; left: 35%;">
