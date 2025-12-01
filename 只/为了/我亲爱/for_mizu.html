@@ -137,16 +137,16 @@
   }
 
   window.addEventListener("scroll", () => {
-    // Compute the current section index
-    const scene = Math.round(window.scrollY / window.innerHeight);
-    const clamped = Math.max(0, Math.min(maxScene, scene));
+    // // Compute the current section index
+    // const scene = Math.round(window.scrollY / window.innerHeight);
+    // const clamped = Math.max(0, Math.min(maxScene, scene));
 
-    if (clamped !== currentScene) {
-      currentScene = clamped;
+    // if (clamped !== currentScene) {
+    //   currentScene = clamped;
 
-      // Update buttons whenever the scene changes
-      updateButtons();
-    }
+    //   // Update buttons whenever the scene changes
+    //   updateButtons();
+    // }
 
     // Update heart fill as before
     const rect = document.getElementById("heartFillRect");
@@ -255,16 +255,24 @@
       const sectionTop = section.offsetTop;
       const sectionBottom = sectionTop + section.offsetHeight;
 
-      // Activate section if it's mostly in view
+      // Section is centered in the viewport
       if (scrollPos + windowHeight * 0.5 >= sectionTop &&
           scrollPos + windowHeight * 0.5 < sectionBottom) {
+
         section.classList.add("active");
-        currentScene = index;
+
+        if (currentScene !== index) {
+          currentScene = index;
+          updateButtons();
+        }
+
       } else {
         section.classList.remove("active");
       }
     });
   }
+
+
 
   // Run on scroll
   window.addEventListener("scroll", updateActiveSection);
