@@ -137,17 +137,6 @@
   }
 
   window.addEventListener("scroll", () => {
-    // // Compute the current section index
-    // const scene = Math.round(window.scrollY / window.innerHeight);
-    // const clamped = Math.max(0, Math.min(maxScene, scene));
-
-    // if (clamped !== currentScene) {
-    //   currentScene = clamped;
-
-    //   // Update buttons whenever the scene changes
-    //   updateButtons();
-    // }
-
     // Update heart fill as before
     const rect = document.getElementById("heartFillRect");
     const maxScroll = document.body.scrollHeight - window.innerHeight;
@@ -169,21 +158,26 @@
 
     // hide left button on first page
     if (currentScene === 0) {
-      leftBtn.style.display = "none";
+      // leftBtn.style.display = "none";
     } else {
       leftBtn.style.display = "flex";
     }
 
     // hide right button on last page
     if (currentScene === maxScene) {
-      rightBtn.style.display = "none";
+      // rightBtn.style.display = "none";
     } else {
       rightBtn.style.display = "flex";
     }
   }
 
   function goPrevPage() {
-    if (currentScene > 0) currentScene -= 1;
+    if (currentScene === 0) {
+      spawnFloatingHeart();
+      return;
+    }
+
+    currentScene -= 1;
 
     pauseHeartbeat();
 
@@ -192,15 +186,17 @@
       behavior: "smooth"
     });
 
-    setTimeout(() => {
-      resumeHeartbeat();
-    }, 300); // matches smooth scroll timing
-
-    updateButtons();
+    setTimeout(resumeHeartbeat, 300);
   }
+
 
   function goNextPage() {
-    if (currentScene < maxScene) currentScene += 1;
+    if (currentScene === maxScene) {
+      spawnFloatingHeart();
+      return;
+    }
+
+    currentScene += 1;
 
     pauseHeartbeat();
 
@@ -209,42 +205,37 @@
       behavior: "smooth"
     });
 
-    setTimeout(() => {
-      resumeHeartbeat();
-    }, 300);
-
-    updateButtons();
+    setTimeout(resumeHeartbeat, 300);
   }
+
+  function spawnFloatingHeart() {
+    const heart = document.createElement("div");
+    heart.textContent = "💗";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 85 + 5 + "%";
+    heart.style.top = Math.random() * 70 + 20 + "%";
+    heart.style.fontSize = (Math.random() * 20 + 25) + "px";
+    heart.style.opacity = "1";
+    heart.style.transition = "transform 1.8s ease-out, opacity 1.8s ease-out";
+
+    document.body.appendChild(heart);
+
+    // float up + fade
+    requestAnimationFrame(() => {
+      heart.style.transform = "translateY(-80px)";
+      heart.style.opacity = "0";
+    });
+
+    // remove after animation
+    setTimeout(() => {
+      heart.remove();
+    }, 2000);
+  }
+
 
 
   // run once when page loads
   window.onload = updateButtons;
-
-  window.addEventListener("scroll", () => {
-    const rect = document.getElementById("heartFillRect");
-
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const scrollPercent = window.scrollY / maxScroll;
-
-    // From y = 100 (empty) → y = 0 (full)
-    const newY = 100 - scrollPercent * 100;
-
-    rect.setAttribute("y", newY);
-  });
-
-  window.addEventListener("scroll", () => {
-    const heart = document.getElementById("scrollHeart");
-
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const percent = window.scrollY / maxScroll; // 0 → 1
-
-    // Range: slowest = 2.4s, fastest = 0.9s (you can tune these)
-    const minSpeed = 0.9;
-    const maxSpeed = 2.2;
-
-    const newDuration = maxSpeed - (percent * (maxSpeed - minSpeed));
-    heart.style.animationDuration = newDuration + "s";
-  });
 
   function updateActiveSection() {
     const sections = document.querySelectorAll("section");
@@ -271,8 +262,6 @@
       }
     });
   }
-
-
 
   // Run on scroll
   window.addEventListener("scroll", updateActiveSection);
