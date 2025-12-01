@@ -5,9 +5,10 @@
   }
 
   section {
-    height: 100vh;
+    height: calc(var(--vh) * 100);
     scroll-snap-align: start;
   }
+
 
   section h1,
   section p {
@@ -122,9 +123,20 @@
 
 <script src="https://kit.fontawesome.com/b20253bfc0.js" crossorigin="anonymous"></script>
 <script>
-  let currentScene = 0;
-  const maxScene = 5; // since scene6 → index 5
+  function setVh() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
 
+  setVh();
+  window.addEventListener('resize', setVh);
+    let currentScene = 0;
+    const maxScene = 5; // since scene6 → index 5
+
+  function getTrueHeight() {
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--vh')) * 100;
+  }
+  
   function pauseHeartbeat() {
     const heart = document.getElementById("scrollHeart");
     heart.style.animationPlayState = "paused";
@@ -177,14 +189,10 @@
       return;
     }
 
-    currentScene -= 1;
-
     pauseHeartbeat();
 
-    window.scrollTo({
-      top: currentScene * window.innerHeight,
-      behavior: "smooth"
-    });
+    if (currentScene > 0) currentScene -= 1;
+    window.scrollTo({ top: currentScene * getTrueHeight(), behavior: "smooth" });
 
     setTimeout(resumeHeartbeat, 300);
     updateSceneIndicator();
@@ -198,14 +206,10 @@
       return;
     }
 
-    currentScene += 1;
-
     pauseHeartbeat();
 
-    window.scrollTo({
-      top: currentScene * window.innerHeight,
-      behavior: "smooth"
-    });
+    if (currentScene < maxScene) currentScene += 1;
+    window.scrollTo({ top: currentScene * getTrueHeight(), behavior: "smooth" });
 
     setTimeout(resumeHeartbeat, 300);
     updateSceneIndicator();
