@@ -255,15 +255,15 @@
       const sectionTop = section.offsetTop;
       const sectionBottom = sectionTop + section.offsetHeight;
 
-      // Activate section if it's mostly in view
       if (scrollPos + windowHeight * 0.5 >= sectionTop &&
           scrollPos + windowHeight * 0.5 < sectionBottom) {
-        section.classList.add("active");
-      } else {
-        section.classList.remove("active");
+
+        currentScene = index;
+        updateButtons();
       }
     });
   }
+
 
   // Run on scroll
   window.addEventListener("scroll", updateActiveSection);
