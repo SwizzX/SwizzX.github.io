@@ -17,6 +17,19 @@
     transition: opacity 1.8s ease, transform 1.8s ease;
   }
 
+  .section-inner {
+    height: calc(var(--vh) * 100 - 18vh);  /* space for buttons + heart */
+    /* display: flex; */
+    flex-direction: column;
+    /* justify-content: center; */
+    padding: 2rem;
+    box-sizing: border-box;
+
+    /* auto fit text when screen is small */
+    font-size: clamp(2rem, 3.2vw, 2.5rem);
+  }
+
+
   .date {
     border-bottom: rgb(165, 97, 216) groove 10px;
     border-top: none;
@@ -293,66 +306,82 @@
 </head>
 <section id="scene1">
   <!-- scene 1 content -->
-   <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 42.5vh;"><div class="date">April 12, 2025</div></h1>
-    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    第一天见到你
-    </p>
+   <div class="section-inner">
+    <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 42.5vh;"><div class="date">April 12, 2025</div></h1>
+      <p style="text-align: center; margin: auto;">
+      第一天见到你
+      </p>
+   </div>
 </section>
 
 <section id="scene2">
   <!-- scene 2 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 42.5vh;"><div class="date">August 5, 2025</div></h1>
-    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    第一次跟你讲话和打mai
-    </p>
+   <div class="section-inner">
+    <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 42.5vh;"><div class="date">August 5, 2025</div></h1>
+      <p style="text-align: center; margin: auto;">
+      第一次跟你讲话和打mai
+      </p>
+   </div>
 </section>
 
 <section id="scene3">
   <!-- scene 3 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 42.5vh;"><div class="date">October 5, 2025</div></h1>
-    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    跟你庆祝生日,然后跟你告白
-    </p>
+   <div class="section-inner">
+    <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 42.5vh;"><div class="date">October 5, 2025</div></h1>
+      <p style="text-align: center; margin: auto;">
+      跟你庆祝生日,然后跟你告白
+      </p>
+   </div>
 </section>
 
 <section id="scene4">
   <!-- scene 4 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;"><div class="date">December 25, 2025</div></h1>
-    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    首先道歉，我的华语还是很烂。<br>
-    其实，我不太会面对面讲话时表达自己感情的，比较会用写的方式。<br>
-    想跟你说一些心事<br>
+   <div class="section-inner">
+    <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;"><div class="date">December 25, 2025</div></h1>
+      <p style="text-align: center; margin: auto;">
+      首先道歉，我的华语还是很烂。<br>
+      其实，我不太会面对面讲话时表达自己感情的，比较会用写的方式。<br>
+      想跟你说一些心事<br>
+      </p>
+    </div>
 </section>
 
 <section id="scene5">
   <!-- scene 5 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;"></h1>
-    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    虽然认识不久，但你给我的感觉像是早就在我生命里占了一个位置，也像是我命中注定会相遇的人。<br>
-    你是第一个会想要理解我，会对我有耐心的，<br>
-    而且在我身边时候让我感觉到自己的存在是被需要的，和被想要的。<br>
+   <div class="section-inner">
+    <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      虽然认识不久，但你给我的感觉像是早就在我生命里占了一个位置，也像是我命中注定会相遇的人。<br>
+      你是第一个会想要理解我，会对我有耐心的，<br>
+      而且在我身边时候让我感觉到自己的存在是被需要的，和被想要的。<br>
+      </p>
+    </div>
 </section>
 
 <section id="scene6">
   <!-- scene 6 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;"></h1>
-    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    你之前有讲过，感觉我们彼此都互相很需要对方，但我没机会告诉你你对我有多重要，而你出现后，生命有变道多好。<br>
-    曾经有跟你讲，我通常不会轻易跟认识的人说我发生过的事，因为习惯了我的故事给人家传出去了，被笑被嘲。<br>
-    你不只让我有心里的安全感，当作我跟你讲的事是真的你会心里保护，<br>
-    但又让我找了一位，不管伤心或开心，我什么事都可以放心没什么压力的跟你说。<br>
-    </p>
+   <div class="section-inner">
+    <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      你之前有讲过，感觉我们彼此都互相很需要对方，但我没机会告诉你你对我有多重要，而你出现后，生命有变道多好。<br>
+      曾经有跟你讲，我通常不会轻易跟认识的人说我发生过的事，因为习惯了我的故事给人家传出去了，被笑被嘲。<br>
+      你不只让我有心里的安全感，当作我跟你讲的事是真的你会心里保护，<br>
+      但又让我找了一位，不管伤心或开心，我什么事都可以放心没什么压力的跟你说。<br>
+      </p>
+    </div>
 </section>
 
 <section id="scene7">
   <!-- scene 7 content -->
-  <h1 style="text-align: center; font-size: 2.5rem; margin: auto; height: 10vh;"></h1>
-    <p style="text-align: center; font-size: 2.5rem; margin: auto;">
-    我会永远感激上天，不只有的机会遇见你这位在我心里如此珍贵的，<br>
-    但又感激有的机会在不知不觉中爱上了世界上最完美的一位。<br>
-    希望未来的日子里，我们可以一起走下去,不管是开心还是难过的时刻，我都想陪在你身边。<br>
-    虽然永远讲不完我有多爱你的事，而又讲到不清楚，希望你也能感受到我对你的爱意。<br>
-    </p>
+   <div class="section-inner">
+    <h1 style="text-align: center;margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      我会永远感激上天，不只有的机会遇见你这位在我心里如此珍贵的，<br>
+      但又感激有的机会在不知不觉中爱上了世界上最完美的一位。<br>
+      希望未来的日子里，我们可以一起走下去,不管是开心还是难过的时刻，我都想陪在你身边。<br>
+      虽然永远讲不完我有多爱你的事，而又讲到不清楚，希望你也能感受到我对你的爱意。<br>
+      </p>
+    </div>
 </section>
 
 <div class="page-btn page-btn-left" onclick="goPrevPage()">
