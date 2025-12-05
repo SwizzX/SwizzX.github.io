@@ -1,3 +1,4 @@
+<!-- =======================  CSS  ======================= -->
 <style>
   html {
     scroll-behavior: smooth;
@@ -9,7 +10,6 @@
     scroll-snap-align: start;
   }
 
-
   section h1,
   section p {
     opacity: 0;
@@ -18,21 +18,15 @@
   }
 
   .section-inner {
-    height: calc(var(--vh) * 100 - 18vh);  /* space for buttons + heart */
-    /* display: flex; */
+    height: calc(var(--vh) * 100 - 18vh);
     flex-direction: column;
-    /* justify-content: center; */
     padding: 2rem;
     box-sizing: border-box;
-
-    /* auto fit text when screen is small */
     font-size: clamp(2rem, 3.2vw, 2.5rem);
   }
 
-
   .date {
     border-bottom: rgb(165, 97, 216) groove 10px;
-    border-top: none;
   }
 
   section.active h1,
@@ -41,192 +35,193 @@
     transform: translateY(0);
   }
 
-
   body {
     font-family: "ZCOOL KuaiLe", sans-serif;
     background-image: linear-gradient(rgb(154, 90, 194), pink);
   }
 
-.page-btn {
-  position: fixed;
-  bottom: 10vh;
-  height: 6vh;
-  width: 6vh;
-  background: #fffdfa;
-  border: 2px solid #b7a78a;
-  border-radius: 10px;
-  box-shadow: 0 4px 5px rgba(0,0,0,0.15);
-  font-size: 2rem;
-  font-family: "Georgia", serif;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  .page-btn {
+    position: fixed;
+    bottom: 10vh;
+    height: 6vh;
+    width: 6vh;
+    background: #fffdfa;
+    border: 2px solid #b7a78a;
+    border-radius: 10px;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.15);
+    font-size: 2rem;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, background 0.2s ease;
+  }
 
-  /* remove transform transitions */
-  transition: box-shadow 0.2s ease, background 0.2s ease;
-}
+  .page-btn-left {
+    left: 10%;
+    animation: wiggle-left 2.7s ease-in-out infinite;
+  }
+  .page-btn-right {
+    right: 10%;
+    animation: wiggle-right 2.7s ease-in-out infinite;
+  }
 
-.page-btn-left {
-  left: 10%;
-  animation: wiggle-left 2.7s ease-in-out infinite;
-  animation-fill-mode: both;
-}
+  @keyframes wiggle-left {
+    0% { transform: rotateY(0deg) translateX(0); }
+    25% { transform: rotateY(18deg) translateX(-2px); }
+    50% { transform: rotateY(12deg) translateX(0); }
+    75% { transform: rotateY(20deg) translateX(-3px); }
+    100% { transform: rotateY(0deg) translateX(0); }
+  }
 
-.page-btn-right {
-  right: 10%;
-  animation: wiggle-right 2.7s ease-in-out infinite;
-  animation-fill-mode: both;
-}
+  @keyframes wiggle-right {
+    0% { transform: rotateY(0deg) translateX(0); }
+    25% { transform: rotateY(-18deg) translateX(2px); }
+    50% { transform: rotateY(-12deg) translateX(0); }
+    75% { transform: rotateY(-20deg) translateX(3px); }
+    100% { transform: rotateY(0deg) translateX(0); }
+  }
 
-@keyframes wiggle-left {
-  0% { transform: rotateY(0deg) translateX(0); }
-  25% { transform: rotateY(18deg) translateX(-2px); }
-  50% { transform: rotateY(12deg) translateX(0); }
-  75% { transform: rotateY(20deg) translateX(-3px); }
-  100% { transform: rotateY(0deg) translateX(0); }
-}
+  @keyframes heartbeat {
+    0%   { transform: translateX(-50%) scale(1); }
+    14%  { transform: translateX(-50%) scale(1.2); }
+    28%  { transform: translateX(-50%) scale(1); }
+    42%  { transform: translateX(-50%) scale(1.2); }
+    70%  { transform: translateX(-50%) scale(1); }
+    100% { transform: translateX(-50%) scale(1); }
+  }
 
-@keyframes wiggle-right {
-  0% { transform: rotateY(0deg) translateX(0); }
-  25% { transform: rotateY(-18deg) translateX(2px); }
-  50% { transform: rotateY(-12deg) translateX(0); }
-  75% { transform: rotateY(-20deg) translateX(3px); }
-  100% { transform: rotateY(0deg) translateX(0); }
-}
+  @keyframes wiggle-assets {
+    0%   { transform: rotate(0deg) scale(1); }
+    25%  { transform: rotate(3deg) scale(1.05); }
+    50%  { transform: rotate(0deg) scale(0.97); }
+    75%  { transform: rotate(-3deg) scale(1.04); }
+    100% { transform: rotate(0deg) scale(1); }
+  }
 
-@keyframes heartbeat {
-  0%   { transform: translateX(-50%) scale(1); }
-  14%  { transform: translateX(-50%) scale(1.2); }
-  28%  { transform: translateX(-50%) scale(1); }
-  42%  { transform: translateX(-50%) scale(1.2); }
-  70%  { transform: translateX(-50%) scale(1); }
-  100% { transform: translateX(-50%) scale(1); }
-}
+  #scrollHeart {
+    position: fixed;
+    bottom: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    color: transparent;
+    -webkit-text-stroke: 2px #ff4d6d;
+    background: linear-gradient(to top, #ff4d6d 0%, transparent 0%);
+    -webkit-background-clip: text;
+    pointer-events: none;
+    animation: heartbeat 2.4s infinite;
+  }
 
-@keyframes wiggle-assets {  
-  0%   { transform: rotate(0deg) scale(1); }
-  25%  { transform: rotate(3deg) scale(1.05); }
-  50%  { transform: rotate(0deg) scale(0.97); }
-  75%  { transform: rotate(-3deg) scale(1.04); }
-  100% { transform: rotate(0deg) scale(1); }
-}
+  #introScreen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #fff0f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 1.4s ease;
+  }
 
-#scrollHeart {
-  position: fixed;
-  bottom: 10vh;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 3rem;
+  #introContent {
+    text-align: center;
+    font-size: 3vh;
+    color: #ff4d6d;
+  }
 
-  /* Start as outline */
-  color: transparent;
-  -webkit-text-stroke: 2px #ff4d6d;
+  .introHeart {
+    font-size: 12vh;
+    animation: introbeat 1.8s infinite ease-in-out;
+  }
 
-  /* Gradient fill controlled by JS */
-  background: linear-gradient(to top, #ff4d6d 0%, transparent 0%);
-  -webkit-background-clip: text;
-  background-clip: text;
+  @keyframes introbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+  }
 
-  pointer-events: none;
-}
+  #musicToggle {
+    animation: tinybeat 2.2s infinite ease-in-out;
+  }
 
+  @keyframes tinybeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
 </style>
 
-<script src="https://kit.fontawesome.com/b20253bfc0.js" crossorigin="anonymous"></script>
+<audio id="bgAudio" src="igyet.mp3" autoplay loop muted></audio>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<!-- =======================  MAIN SCRIPT ======================= -->
 <script>
   function setVh() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
-
   setVh();
   window.addEventListener('resize', setVh);
-    let currentScene = 0;
-    const maxScene = 6; // since scene6 → index 5
+
+  let currentScene = 0;
+  const maxScene = 6;
 
   function getTrueHeight() {
     return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--vh')) * 100;
   }
-  
+
   function pauseHeartbeat() {
-    const heart = document.getElementById("scrollHeart");
-    heart.style.animationPlayState = "paused";
-    heart.style.transform = "translateX(-50%) scale(1)"; // reset scale
+    const h = document.getElementById("scrollHeart");
+    h.style.animationPlayState = "paused";
+    h.style.transform = "translateX(-50%) scale(1)";
   }
 
   function resumeHeartbeat() {
-    const heart = document.getElementById("scrollHeart");
-    heart.style.animationPlayState = "running";
+    document.getElementById("scrollHeart").style.animationPlayState = "running";
   }
 
   window.addEventListener("scroll", () => {
-    // Update heart fill as before
     const rect = document.getElementById("heartFillRect");
     const maxScroll = document.body.scrollHeight - window.innerHeight;
     const scrollPercent = window.scrollY / maxScroll;
-    const newY = 100 - scrollPercent * 100;
-    rect.setAttribute("y", newY);
-
-    // Update heartbeat speed dynamically
+    rect.setAttribute("y", 100 - scrollPercent * 100);
+    
     const heart = document.getElementById("scrollHeart");
-    const minSpeed = 0.9;
-    const maxSpeed = 2.2;
-    const newDuration = maxSpeed - (scrollPercent * (maxSpeed - minSpeed));
-    heart.style.animationDuration = newDuration + "s";
+    const minSpeed = 0.9, maxSpeed = 2.2;
+    heart.style.animationDuration = (maxSpeed - scrollPercent * (maxSpeed - minSpeed)) + "s";
   });
 
   function updateButtons() {
-    const leftBtn = document.querySelector('.page-btn-left');
-    const rightBtn = document.querySelector('.page-btn-right');
-
-    // hide left button on first page
-    if (currentScene === 0) {
-      // leftBtn.style.display = "none";
-    } else {
-      leftBtn.style.display = "flex";
-    }
-
-    // hide right button on last page
-    if (currentScene === maxScene) {
-      // rightBtn.style.display = "none";
-    } else {
-      rightBtn.style.display = "flex";
-    }
+    const leftBtn  = document.querySelector(".page-btn-left");
+    const rightBtn = document.querySelector(".page-btn-right");
+    leftBtn.style.display  = currentScene === 0 ? "flex" : "flex";
+    rightBtn.style.display = currentScene === maxScene ? "flex" : "flex";
   }
 
   function goPrevPage() {
-    if (currentScene === 0) {
-      spawnFloatingHeart();
-      return;
-    }
-
+    if (currentScene === 0) return spawnFloatingHeart();
     pauseHeartbeat();
-
-    if (currentScene > 0) currentScene -= 1;
+    currentScene--;
     window.scrollTo({ top: currentScene * getTrueHeight(), behavior: "smooth" });
-
     setTimeout(resumeHeartbeat, 300);
     updateSceneIndicator();
-
   }
 
-
   function goNextPage() {
-    if (currentScene === maxScene) {
-      spawnFloatingHeart();
-      return;
-    }
-
+    if (currentScene === maxScene) return spawnFloatingHeart();
     pauseHeartbeat();
-
-    if (currentScene < maxScene) currentScene += 1;
+    currentScene++;
     window.scrollTo({ top: currentScene * getTrueHeight(), behavior: "smooth" });
-
     setTimeout(resumeHeartbeat, 300);
     updateSceneIndicator();
-
   }
 
   function spawnFloatingHeart() {
@@ -234,29 +229,17 @@
     heart.textContent = "💗";
     heart.style.position = "fixed";
     heart.style.left = Math.random() * 85 + 5 + "%";
-    heart.style.top = Math.random() * 70 + 20 + "%";
+    heart.style.top  = Math.random() * 70 + 20 + "%";
     heart.style.fontSize = (Math.random() * 20 + 25) + "px";
     heart.style.opacity = "1";
     heart.style.transition = "transform 1.8s ease-out, opacity 1.8s ease-out";
-
     document.body.appendChild(heart);
-
-    // float up + fade
     requestAnimationFrame(() => {
       heart.style.transform = "translateY(-80px)";
       heart.style.opacity = "0";
     });
-
-    // remove after animation
-    setTimeout(() => {
-      heart.remove();
-    }, 2000);
+    setTimeout(() => heart.remove(), 2000);
   }
-
-
-
-  // run once when page loads
-  window.onload = updateButtons;
 
   function updateActiveSection() {
     const sections = document.querySelectorAll("section");
@@ -264,31 +247,24 @@
     const windowHeight = window.innerHeight;
 
     sections.forEach((section, index) => {
-      const sectionTop = section.offsetTop;
-      const sectionBottom = sectionTop + section.offsetHeight;
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
 
-      // Section is centered in the viewport
-      if (scrollPos + windowHeight * 0.5 >= sectionTop &&
-          scrollPos + windowHeight * 0.5 < sectionBottom) {
-
+      if (scrollPos + windowHeight * 0.5 >= top &&
+          scrollPos + windowHeight * 0.5 < bottom) {
         section.classList.add("active");
-
         if (currentScene !== index) {
           currentScene = index;
           updateSceneIndicator();
           updateButtons();
         }
-
       } else {
         section.classList.remove("active");
       }
     });
   }
 
-  // Run on scroll
   window.addEventListener("scroll", updateActiveSection);
-
-  // Run on page load
   window.addEventListener("load", updateActiveSection);
 
   function updateSceneIndicator() {
@@ -296,14 +272,56 @@
   }
 </script>
 
+<!-- =======================  HEAD  ======================= -->
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
+  <link rel="icon" href="../../../strawberry.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <title>For Mizu</title>
 </head>
+
+<!-- =======================  INTRO SCREEN ======================= -->
+<div id="introScreen">
+  <div id="introContent">
+    <div class="introHeart">💌</div>
+    <p>Tap to open the letter</p>
+  </div>
+</div>
+
+<!-- ========== FIXED: UPDATEBUTTONS ADDED TO ONLOAD ========== -->
+<script>
+  window.onload = () => {
+    const intro  = document.getElementById("introScreen");
+    const audio  = document.getElementById("bgAudio");
+    const toggle = document.getElementById("musicToggle");
+
+    let musicOn = false;
+    audio.volume = 0.225;
+
+    intro.addEventListener("click", () => {
+      audio.muted = false;
+      audio.play();
+      musicOn = true;
+
+      intro.style.opacity = 0;
+      setTimeout(() => intro.style.display = "none", 1400);
+
+      toggle.style.display = "block";
+    });
+
+    toggle.addEventListener("click", () => {
+      if (musicOn) { audio.pause(); musicOn = false; }
+      else        { audio.play();  musicOn = true; }
+    });
+
+    /* 🔥 Your request: call updateButtons at bottom */
+    updateButtons();
+  };
+</script>
+
+<!-- =======================  SECTIONS  ======================= -->
+
 <section id="scene1">
   <!-- scene 1 content -->
    <div class="section-inner">
@@ -456,6 +474,24 @@ document.getElementById("scrollHeart").addEventListener("click", () => {
        z-index: 9999;
      ">
   scene: 1
+</div>
+
+<div id="musicToggle"
+     style="
+       position: fixed;
+       bottom: 4vh;
+       right: 4vh;
+       width: 7vh;
+       height: 7vh;
+       cursor: pointer;
+       z-index: 9999;
+       display: none;
+     ">
+  <svg id="musicHeart" viewBox="0 0 100 100" style="width:100%; height:100%;">
+    <path d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
+          fill="#ff4d6d">
+    </path>
+  </svg>
 </div>
 
 <!-- <div style="position: fixed; bottom: 10vh; left: 35%;">
