@@ -155,6 +155,68 @@
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.15); }
   }
+
+  /* ================= UNWRAP INTRO EFFECT ================= */
+
+  #introScreen.unwrap {
+    animation: unwrap-fade 1.4s ease forwards;
+  }
+
+  #introScreen::before,
+  #introScreen::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff0f5;
+    z-index: -1;
+  }
+
+  #introScreen::before {
+    left: 0;
+  }
+
+  #introScreen::after {
+    right: 0;
+  }
+
+  #introScreen.unwrap::before {
+    animation: unwrap-left 1.2s ease forwards;
+  }
+
+  #introScreen.unwrap::after {
+    animation: unwrap-right 1.2s ease forwards;
+  }
+
+  @keyframes unwrap-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-110%); }
+  }
+
+  @keyframes unwrap-right {
+    from { transform: translateX(0); }
+    to   { transform: translateX(110%); }
+  }
+
+  @keyframes unwrap-fade {
+    0%   { opacity: 1; }
+    70%  { opacity: 1; }
+    100% { opacity: 0; pointer-events: none; }
+  }
+
+  /* Heart anticipation */
+  #introScreen.unwrap .introHeart {
+    animation: heart-release 0.6s ease forwards;
+  }
+
+  @keyframes heart-release {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(0.9); }
+    100% { transform: scale(1.1); }
+  }
+
+
 </style>
 
 <audio id="bgAudio" src="igyet.mp3" autoplay loop muted></audio>
@@ -172,7 +234,7 @@
   window.addEventListener('resize', setVh);
 
   let currentScene = 0;
-  const maxScene = 6;
+  const maxScene = 9;
 
   function getTrueHeight() {
     return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--vh')) * 100;
@@ -285,7 +347,7 @@
 <div id="introScreen">
   <div id="introContent">
     <div class="introHeart">💌</div>
-    <p>Tap to open the letter</p>
+    <!-- <p>Tap to open the letter</p> -->
   </div>
 </div>
 
@@ -304,11 +366,14 @@
       audio.play();
       musicOn = true;
 
-      intro.style.opacity = 0;
-      setTimeout(() => intro.style.display = "none", 1400);
+      intro.classList.add("unwrap");
 
-      toggle.style.display = "block";
+      setTimeout(() => {
+        intro.style.display = "none";
+        toggle.style.display = "block";
+      }, 1400);
     });
+
 
     toggle.addEventListener("click", () => {
       if (musicOn) { audio.pause(); musicOn = false; }
@@ -392,6 +457,45 @@
 <section id="scene7">
   <!-- scene 7 content -->
    <div class="section-inner">
+    <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      我内心深处最要做的事是把你以前的痛苦都忘掉，<br>
+      而补回全世界欠着你的开心,和天天提醒你是一位应该被珍惜你。<br>
+      你多辛苦了，而被你身边的人欺负了，全世界是你最值得疼爱珍惜的。<br>
+      如果让了我这机会，我会用尽全力保护你，疼爱你，和陪伴你。<br>
+      </p>
+    </div>
+</section>
+
+<section id="scene8">
+  <!-- scene 8 content -->
+   <div class="section-inner">
+    <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      也需要再讲一声谢谢和对不起，认识了我会把你拖进了更多问题。<br>
+      道歉，应为我身边的人被影响到，而是我一生挚爱的。<br>
+      但谢谢你愿意包容我，和愿意陪我一起面对我们的这些事情，而不是选择离开我。<br>
+      又谢谢，你愿意给我机会陪着你，一起手牵手面对我们的问题。<br>
+      </p>
+    </div>
+</section>
+
+<section id="scene9">
+  <!-- scene 9 content -->
+   <div class="section-inner">
+    <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      爱上了你，我学会了好多新的事，<br>
+      学会了讲华语，学会了怎样去保护一个人，怎样去疼爱一个人，怎样去耐心的了解一个人。<br>
+      你让我变成了一个更好的人，<br>
+      也让我知道了，原来我可以多么爱一个人。<br>
+      </p>
+    </div>
+</section>
+
+<section id="scene10">
+  <!-- scene 10 content -->
+   <div class="section-inner">
     <h1 style="text-align: center;margin: auto; height: 10vh;"></h1>
       <p style="text-align: center; margin: auto;">
       我会永远感激上天，不只有的机会遇见你这位在我心里如此珍贵的，<br>
@@ -406,41 +510,75 @@
   <i class="fa-solid fa-arrow-left"></i>
 </div>
 
-<svg id="scrollHeart" width="80" height="80" viewBox="0 0 100 100" style="
-  animation: heartbeat 2.4s infinite;
-  position: fixed;
-  bottom: 10vh;
-  left: 50%;
-  transform: translateX(-50%);
-  pointer-events: none;
-  color: #ff4d6d; text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d;
-">
-  <!-- Heart Outline -->
-  <path id="heartOutline"
-    d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
-    fill="none"
-    stroke="#ff4d6d"
-    stroke-width="5"
-  />
+<div
+  id="ControlCentre"
+style=  "  position: fixed;
+            bottom: 2.6vh;
+            right: 40%;
+            width: 7vh;
+            height: 7vh;
+            cursor: pointer;
+            z-index: 9999;
+            display: none;
 
-  <!-- Red Fill -->
-  <defs>
-    <clipPath id="heartClip">
-      <path
-        d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
-      ></path>
-    </clipPath>
-  </defs>
+            display: flex;
+            align-items: center;
+            justify-content: center;"
+  >
+  <svg id="scrollHeart" width="80" height="80" viewBox="0 0 100 100" style="
+    animation: heartbeat 2.4s infinite;
+    position: fixed;
+    bottom: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    color: #ff4d6d; text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d;
+  ">
+    <!-- Heart Outline -->
+    <path id="heartOutline"
+      d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
+      fill="none"
+      stroke="#ff4d6d"
+      stroke-width="5"
+    />
 
-  <!-- Gradual Fill Rectangle -->
-  <rect id="heartFillRect"
-    x="0" y="100"
-    width="100" height="100"
-    fill="#ff4d6d"
-    clip-path="url(#heartClip)"
-  />
-</svg>
+    <!-- Red Fill -->
+    <defs>
+      <clipPath id="heartClip">
+        <path
+          d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
+        ></path>
+      </clipPath>
+    </defs>
 
+    <!-- Gradual Fill Rectangle -->
+    <rect id="heartFillRect"
+      x="0" y="100"
+      width="100" height="100"
+      fill="#ff4d6d"
+      clip-path="url(#heartClip)"
+    />
+  </svg>
+
+  <div id="musicToggle"
+      style="
+        position: fixed;
+        width: 7vh;
+        height: 7vh;
+        cursor: pointer;
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      ">
+    <i class="fa-solid fa-music" 
+    style=" font-size: 4vh; 
+            color: #400065;
+            align-items: center;
+            justify-content: center;
+    "></i>
+  </div>
+</div>
 <!-- <script>
 document.getElementById("scrollHeart").addEventListener("click", () => {
   const next = document.querySelector("section:nth-of-type(2)");
@@ -476,24 +614,7 @@ document.getElementById("scrollHeart").addEventListener("click", () => {
   scene: 1
 </div>
 
-<div id="musicToggle"
-     style="
-       position: fixed;
-       bottom: 2.6vh;
-       right: 40%;
-       width: 7vh;
-       height: 7vh;
-       cursor: pointer;
-       z-index: 9999;
-       display: none;
-     ">
-  <i class="fa-solid fa-music" style="font-size: 4vh; color: #400065;"></i>
-  <!-- <svg id="musicHeart" viewBox="0 0 100 100" style="width:100%; height:100%;">
-    <path d="M50 82 L20 52 C5 37 5 15 25 10 C35 8 45 14 50 22 C55 14 65 8 75 10 C95 15 95 37 80 52 Z"
-          fill="#ff4d6d">
-    </path>
-  </svg> -->
-</div>
+
 
 <!-- <div style="position: fixed; bottom: 10vh; left: 35%;">
   <button onclick="window.scrollTo(0, (currentScene - 1) % 6 * window.innerHeight)" style="background: transparent; border: 1px black; height: 5vh; width: 5vh;">
