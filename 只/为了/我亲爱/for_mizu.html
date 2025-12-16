@@ -261,13 +261,6 @@
     heart.style.animationDuration = (maxSpeed - scrollPercent * (maxSpeed - minSpeed)) + "s";
   });
 
-  function updateButtons() {
-    const leftBtn  = document.querySelector(".page-btn-left");
-    const rightBtn = document.querySelector(".page-btn-right");
-    leftBtn.style.display  = currentScene === 0 ? "flex" : "flex";
-    rightBtn.style.display = currentScene === maxScene ? "flex" : "flex";
-  }
-
   function goPrevPage() {
     spawnFloatingHeart();
     if (currentScene === 0) return ;
@@ -320,7 +313,6 @@
         if (currentScene !== index) {
           currentScene = index;
           updateSceneIndicator();
-          updateButtons();
         }
       } else {
         section.classList.remove("active");
@@ -382,8 +374,6 @@
       else        { audio.play();  musicOn = true; }
     });
 
-    /* 🔥 Your request: call updateButtons at bottom */
-    updateButtons();
   };
 </script>
 
@@ -685,7 +675,7 @@ document.getElementById("scrollHeart").addEventListener("click", () => {
        font-family: monospace;
        z-index: 9999;
      ">
-  1/12
+  1/16
 </div>
 
 
