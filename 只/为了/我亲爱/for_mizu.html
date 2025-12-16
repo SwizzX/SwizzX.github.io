@@ -234,7 +234,7 @@
   window.addEventListener('resize', setVh);
 
   let currentScene = 0;
-  const maxScene = 9;
+  const maxScene = 15;
 
   function getTrueHeight() {
     return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--vh')) * 100;
@@ -269,7 +269,8 @@
   }
 
   function goPrevPage() {
-    if (currentScene === 0) return spawnFloatingHeart();
+    spawnFloatingHeart();
+    if (currentScene === 0) return ;
     pauseHeartbeat();
     currentScene--;
     window.scrollTo({ top: currentScene * getTrueHeight(), behavior: "smooth" });
@@ -278,7 +279,8 @@
   }
 
   function goNextPage() {
-    if (currentScene === maxScene) return spawnFloatingHeart();
+    spawnFloatingHeart()
+    if (currentScene === maxScene) return;
     pauseHeartbeat();
     currentScene++;
     window.scrollTo({ top: currentScene * getTrueHeight(), behavior: "smooth" });
@@ -330,7 +332,7 @@
   window.addEventListener("load", updateActiveSection);
 
   function updateSceneIndicator() {
-    document.getElementById("sceneIndicator").textContent = "scene: " + (currentScene + 1);
+    document.getElementById("sceneIndicator").textContent = (currentScene + 1) + "/" + (maxScene + 1);
   }
 </script>
 
@@ -446,7 +448,7 @@
    <div class="section-inner">
     <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
       <p style="text-align: center; margin: auto;">
-      你之前有讲过，感觉我们彼此都互相很需要对方，但我没机会告诉你你对我有多重要，而你出现后，生命有变道多好。<br>
+      你之前有讲过，感觉我们彼此都互相很需要对方，但我没机会告诉你你对我有多重要，而你出现后，我生命有变道多好。<br>
       曾经有跟你讲，我通常不会轻易跟认识的人说我发生过的事，因为习惯了我的故事给人家传出去了，被笑被嘲。<br>
       你不只让我有心里的安全感，当作我跟你讲的事是真的你会心里保护，<br>
       但又让我找了一位，不管伤心或开心，我什么事都可以放心没什么压力的跟你说。<br>
@@ -459,10 +461,10 @@
    <div class="section-inner">
     <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
       <p style="text-align: center; margin: auto;">
-      我内心深处最要做的事是把你以前的痛苦都忘掉，<br>
-      而补回全世界欠着你的开心,和天天提醒你是一位应该被珍惜你。<br>
-      你多辛苦了，而被你身边的人欺负了，全世界是你最值得疼爱珍惜的。<br>
-      如果让了我这机会，我会用尽全力保护你，疼爱你，和陪伴你。<br>
+      爱上了你，我学会了好多新的事，<br>
+      学会了讲华语，学会了怎样去保护一个人，怎样去疼爱一个人，怎样去耐心的了解一个人。<br>
+      你让我变成了一个更好的人，<br>
+      也让我知道了，原来我可以多么爱一个人。<br>
       </p>
     </div>
 </section>
@@ -485,10 +487,10 @@
    <div class="section-inner">
     <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
       <p style="text-align: center; margin: auto;">
-      爱上了你，我学会了好多新的事，<br>
-      学会了讲华语，学会了怎样去保护一个人，怎样去疼爱一个人，怎样去耐心的了解一个人。<br>
-      你让我变成了一个更好的人，<br>
-      也让我知道了，原来我可以多么爱一个人。<br>
+      我内心深处最要做的事是把你以前的痛苦都忘掉，<br>
+      而补回全世界欠着你的开心,和天天提醒你是一位应该被珍惜你。<br>
+      你多辛苦了，而被你身边的人欺负了，全世界是你最值得疼爱珍惜的。<br>
+      如果让了我这机会，我会用尽全力保护你，疼爱你，和陪伴你。<br>
       </p>
     </div>
 </section>
@@ -496,12 +498,80 @@
 <section id="scene10">
   <!-- scene 10 content -->
    <div class="section-inner">
+    <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      也再需要道歉，关系我最近没安全感的事。<br>
+      我也知道了，最近我有多点粘人，而多点没安全感。<br>
+      我不是不相信你，已经聊了蛮多次，什么发生的事，永远会相信你讲的，<br>
+      但这些都是因为我对你的爱情越来越深，而越来越害怕失去你，<br>
+      特别怕是会给人家抢掉。
+      </p>
+    </div>
+</section>
+
+<section id="scene11">
+  <!-- scene 11 content -->
+   <div class="section-inner">
+    <h1 style="text-align: center; margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      我之前有说过，发生过很多次了，不管是什么原因，最后我身边的人都会离开我。<br>
+      我每年都会认识很多新的人，但结果总是一样。<br>
+      但你不一样，你选择留下来，哪怕你其实没有任何义务。<br>
+      虽然我表面上好像已经习惯了，但老实说，你是独一无二的。<br>
+      你真的，真的，真的是我生命里最重要的人，我真的无法承受失去你的那种可能。
+      </p>
+    </div>
+</section>
+
+<section id="scene12">
+  <!-- scene 12 content -->
+   <div class="section-inner">
     <h1 style="text-align: center;margin: auto; height: 10vh;"></h1>
       <p style="text-align: center; margin: auto;">
       我会永远感激上天，不只有的机会遇见你这位在我心里如此珍贵的，<br>
       但又感激有的机会在不知不觉中爱上了世界上最完美的一位。<br>
       希望未来的日子里，我们可以一起走下去,不管是开心还是难过的时刻，我都想陪在你身边。<br>
       虽然永远讲不完我有多爱你的事，而又讲到不清楚，希望你也能感受到我对你的爱意。<br>
+      </p>
+    </div>
+</section>
+
+<section id="scene13">
+  <!-- scene 13 content -->
+   <div class="section-inner">
+    <h1 style="text-align: center;margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      Mizu
+      </p>
+    </div>
+</section>
+
+<section id="scene14">
+  <!-- scene 14 content -->
+   <div class="section-inner">
+    <h1 style="text-align: center;margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      Luna
+      </p>
+    </div>
+</section>
+
+<section id="scene15">
+  <!-- scene 15 content -->
+   <div class="section-inner">
+    <h1 style="text-align: center;margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      Jin Yee<br>
+      </p>
+    </div>
+</section>
+
+<section id="scene16">
+  <!-- scene 16 content -->
+   <div class="section-inner">
+    <h1 style="text-align: center;margin: auto; height: 10vh;"></h1>
+      <p style="text-align: center; margin: auto;">
+      我爱你。
       </p>
     </div>
 </section>
@@ -598,6 +668,10 @@ document.getElementById("scrollHeart").addEventListener("click", () => {
   <img src="../../../pencil.png" style="width: 5vh; height: 5vh;" />
 </div>
 
+<div style="position: fixed; right: 1%; bottom:20%;">
+  <img src="heart_doodle_white.gif" style="width: 20vh; height: 20vh;" />
+</div>
+
 <div id="sceneIndicator"
      style="
        position: fixed;
@@ -611,7 +685,7 @@ document.getElementById("scrollHeart").addEventListener("click", () => {
        font-family: monospace;
        z-index: 9999;
      ">
-  scene: 1
+  1/12
 </div>
 
 
